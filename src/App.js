@@ -111,7 +111,7 @@ const stepOneValidationSchema = Yup.object({
   Source: Yup.string().required().label("Source"),
   Destination: Yup.string().required().label("Destination"),
   car: Yup.string().required("Car selection required"),
-  travellers: Yup.number()
+  travellers: Yup.number("Must be number").max(6, "max is 5")
 });
 
 const StepOne = (props) => {
@@ -163,7 +163,7 @@ const StepOne = (props) => {
       <div id="Passangers">
      <label htmlFor='travellers'>Enter no of Travelelrs</label>
      <br/>
-     <Field name='travellers'/>
+     <Field name='travellers' />
      <ErrorMessage name="travellers"/>
      </div>
      <br />
@@ -238,13 +238,14 @@ const StepTwo = (props) => {
 const Step3 = styled(Step2)`
 
 button{
-  margin-top:20px;
+  margin:20px;
+  
  
 }
 `;
 const stepThreeValidationSchema = Yup.object({
   phone: Yup.number(),
-  name: Yup.string().required('Name is required'),
+  name: Yup.string().required("Name is required"),
   remarks: Yup.string()
 })
 const StepThree = (props) => {
@@ -275,11 +276,15 @@ const StepThree = (props) => {
       
      <label htmlFor='phone'>Enter your Mobile No: </label>
      <Field type='number' id='phone' name='phone'/>
-      
+     <br />
      <label htmlFor='name'>Enter your name *</label>
           <Field type='text' id='name' name='name'/>
+         
+          <ErrorMessage name="name"/>
+          <br />
           <label htmlFor='remarks'>Enter Remarks(optional) </label>
           <Field type='text' id='remarks' name='remarks'/>
+          <br />
           <button type="button" onClick={() => props.prev(values)}>
             Back
           </button>
